@@ -19,6 +19,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     private var questionFactory: QuestionFactory?
     private var currentQuestion: QuizQuestion?
     private var alertPresenter: AlertPresenter?
+    private let statisticService: StatisticServiceProtocol = StatisticServiceImplementation()
     
     // MARK: - View Life Cycles
     override func viewDidLoad() {
@@ -119,21 +120,24 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate, 
     
     private func showNextQuestionOrResults() {
         if currentQuestionIndex == questionsAmount - 1 {
-            let text = "Ваш результат: \(correctAnswers)/10"
-            let viewModel = QuizResultsViewModel(title: "Этот раунд окончен!", text: text, buttonText: "Сыграть ещё раз")
-            // questionFactory?.requestNextQuestion()
-            show(quiz: viewModel)
+            statisticService.storeCurrentResult(correct: correctAnswers, total: questionsAmount)
+            
+            let currentScore = "Ваш результат: \(correctAnswers)/\(questionsAmount)"
+            let fullText = currentScore + "\n" + statisticService.bestAttemptText
+            
+            let viewModel = QuizResultsViewModel(
+                title: "Этот раунд окончен!",
+                text: fullText,
+                buttonText: "Сыграть ещё раз"
+            )
+            alertPresenter?.showAlert(quiz: viewModel, on: self)
         } else {
             currentQuestionIndex += 1
             questionFactory?.requestNextQuestion()
-            }
-            
-            yesButton.isEnabled = true
-            noButton.isEnabled = true
         }
-    
-    private func show(quiz result: QuizResultsViewModel) {
-        alertPresenter?.showAlert(quiz: result, on: self)
+        
+        yesButton.isEnabled = true
+        noButton.isEnabled = true
     }
     
     
