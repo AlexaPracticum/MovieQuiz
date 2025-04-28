@@ -110,18 +110,24 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="KXM-rl-i6O">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <color key="tintColor" red="0.9724779724" green="1" blue="0.95110423450000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="KXM-rl-i6O" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="54m-LS-tXo"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NRN-tt-Vzt" secondAttribute="trailing" constant="20" id="MSP-HM-g2K"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="NRN-tt-Vzt" secondAttribute="bottom" constant="10" id="PeM-TG-cVH"/>
                             <constraint firstItem="NRN-tt-Vzt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="jgw-lx-tgK"/>
                             <constraint firstItem="NRN-tt-Vzt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qHf-KH-ZZu"/>
+                            <constraint firstItem="KXM-rl-i6O" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="z1F-Hl-Dpm"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="KXM-rl-i6O" id="8X8-NG-gTN"/>
                         <outlet property="counterLabel" destination="4oc-P8-jbc" id="8bN-em-p4C"/>
                         <outlet property="imageView" destination="i9V-WM-9vI" id="eXm-WB-JVD"/>
                         <outlet property="noButton" destination="Zpq-wb-XZw" id="gtN-sv-jzm"/>
