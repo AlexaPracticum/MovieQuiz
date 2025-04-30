@@ -1,4 +1,3 @@
-import Foundation
 import UIKit
 
 final class AlertPresenter {
@@ -21,9 +20,27 @@ final class AlertPresenter {
         ) { [weak self] _ in
             self?.delegate?.showAlert()
         }
-            alert.addAction(action)
-            
-        viewController.present(alert, animated: true, completion: nil)
+        alert.addAction(action)
         
+        viewController.present(alert, animated: true, completion: nil)
+    }
+    
+    func showAlert(model: AlertModel, on viewController: UIViewController) {
+        let alert = UIAlertController(
+            title: model.title,
+            message: model.message,
+            preferredStyle: .alert
+        )
+        
+        let action = UIAlertAction(
+            title: model.buttonText,
+            style: .default
+        ) { _ in
+            model.completion()
+        }
+        
+        alert.addAction(action)
+        
+        viewController.present(alert, animated: true, completion: nil)
     }
 }

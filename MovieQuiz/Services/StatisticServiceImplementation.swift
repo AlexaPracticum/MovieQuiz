@@ -1,9 +1,9 @@
 import Foundation
 
 final class StatisticServiceImplementation: StatisticServiceProtocol {
-   
+    
     private let storage: UserDefaults = .standard
-   
+    
     private var correctAnswersCount: Int {
         get {
             storage.integer(forKey: "correctAnswersCount")
@@ -40,9 +40,9 @@ final class StatisticServiceImplementation: StatisticServiceProtocol {
     
     var bestAttempt: GameResult {
         get {
-           let totalQuestions = storage.integer(forKey: "bestTotalQuestions")
-           let correctAnswers = storage.integer(forKey: "bestCorrectAnswers")
-           let dateFinish = storage.object(forKey: "bestDateFinish") as? Date ?? Date()
+            let totalQuestions = storage.integer(forKey: "bestTotalQuestions")
+            let correctAnswers = storage.integer(forKey: "bestCorrectAnswers")
+            let dateFinish = storage.object(forKey: "bestDateFinish") as? Date ?? Date()
             
             return GameResult(
                 correctAnswers: correctAnswers,
@@ -60,7 +60,7 @@ final class StatisticServiceImplementation: StatisticServiceProtocol {
         gameCount += 1
         correctAnswersCount += count
         totalQuestionCount += amount
-
+        
         let newResult = GameResult(
             correctAnswers: count,
             totalQuestions: amount,
@@ -68,8 +68,8 @@ final class StatisticServiceImplementation: StatisticServiceProtocol {
         
         let best = bestAttempt
         let bestAccuracy = best.totalQuestions > 0
-            ? Double(best.correctAnswers) / Double(best.totalQuestions)
-            : -1
+        ? Double(best.correctAnswers) / Double(best.totalQuestions)
+        : -1
         let newAccuracy = Double(count) / Double(amount)
         
         if newAccuracy > bestAccuracy {
@@ -80,13 +80,13 @@ final class StatisticServiceImplementation: StatisticServiceProtocol {
 }
 
 extension StatisticServiceImplementation {
-        var bestAttemptText: String {
+    var bestAttemptText: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .short
-
+        
         let result = bestAttempt
-            
+        
         return """
         Количество сыграных квизов: \(gameCount)
         Рекорд: \(result.correctAnswers)/\(result.totalQuestions) \(dateFormatter.string(from: result.dateFinish))
