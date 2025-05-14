@@ -23,6 +23,8 @@ final class AlertPresenter {
         alert.addAction(action)
         
         viewController.present(alert, animated: true, completion: nil)
+        
+        alert.view.accessibilityIdentifier = "Game results"
     }
     
     func showAlert(model: AlertModel, on viewController: UIViewController) {
@@ -42,5 +44,9 @@ final class AlertPresenter {
         alert.addAction(action)
         
         viewController.present(alert, animated: true, completion: nil)
+        
+        alert.view.accessibilityIdentifier = "Game results"
+        
     }
+    
 }
