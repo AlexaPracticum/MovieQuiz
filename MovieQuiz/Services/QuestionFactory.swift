@@ -56,8 +56,10 @@ final class QuestionFactory: QuestionFactoryProtocol {
             
             let rating = Float(movie.rating) ?? 0
             
-            let text = "Рейтинг этого фильма больше чем 7?"
-            let correctAnswer = rating > 7
+            let randomThreshold = Float.random(in: 6.0...9.0)
+        
+            let text = String(format: "Рейтинг этого фильма больше чем %.1f?", randomThreshold)
+            let correctAnswer = rating > randomThreshold
             
             let question = QuizQuestion(imageName: imageData,
                                         text: text,
@@ -72,3 +74,9 @@ final class QuestionFactory: QuestionFactoryProtocol {
     
 }
 
+extension Double {
+    func rounded(toPlaces places: Int) -> Double {
+        let factor = pow(10.0, Double(places))
+        return (self * factor).rounded() / factor
+    }
+}

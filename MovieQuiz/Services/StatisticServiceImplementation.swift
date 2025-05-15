@@ -67,9 +67,8 @@ final class StatisticServiceImplementation: StatisticServiceProtocol {
             dateFinish: Date())
         
         let best = bestAttempt
-        let bestAccuracy = best.totalQuestions > 0
-        ? Double(best.correctAnswers) / Double(best.totalQuestions)
-        : -1
+        let bestAccuracy = best.totalQuestions > 0 ?
+        Double(best.correctAnswers) / Double(best.totalQuestions) : -1
         let newAccuracy = Double(count) / Double(amount)
         
         if newAccuracy > bestAccuracy {
