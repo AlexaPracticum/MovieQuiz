@@ -2,6 +2,7 @@ import XCTest
 @testable import MovieQuiz
 
 final class MovieQuizViewControllerMock: MovieQuizViewControllerProtocol {
+    
     var alertShown = false
     var quizStepShown: QuizStepViewModel?
     var quizResultShown: QuizResultsViewModel?
@@ -11,6 +12,10 @@ final class MovieQuizViewControllerMock: MovieQuizViewControllerProtocol {
     var setButtonsIsEnabled: Bool?
 
     func showAlert() {
+        alertShown = true
+    }
+    
+    func showAlert(model: MovieQuiz.AlertModel) {
         alertShown = true
     }
 
