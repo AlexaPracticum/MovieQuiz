@@ -18,11 +18,14 @@ final class MovieQuizViewController: UIViewController, AlertPresenterDelegate, M
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        alertPresenter = AlertPresenter()
-        alertPresenter?.delegate = self
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderWidth = .zero
         
-        presenter = MovieQuizPresenter(viewController: self)
-        showLoadingIndicator()
+         alertPresenter = AlertPresenter(viewController: self)
+         alertPresenter?.delegate = self
+
+         presenter = MovieQuizPresenter(viewController: self)
+         showLoadingIndicator()
     }
     
     // MARK: - AlertPresenterDelegate
@@ -30,6 +33,10 @@ final class MovieQuizViewController: UIViewController, AlertPresenterDelegate, M
         presenter.restartGame()
         yesButton.isEnabled = true
         noButton.isEnabled = true
+    }
+
+    func showAlert(model: AlertModel) {
+        alertPresenter?.showAlert(model: model)
     }
     
     // MARK: - IB Actions
@@ -49,11 +56,11 @@ final class MovieQuizViewController: UIViewController, AlertPresenterDelegate, M
         counterLabel.text = step.questionNumber
         
         imageView.layer.masksToBounds = true
-        imageView.layer.borderWidth = 0
+        imageView.layer.borderWidth = .zero
+        imageView.layer.borderColor = UIColor.clear.cgColor
     }
     
     func highlightImageBorder(isCorrect: Bool) {
-        imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
         imageView.layer.borderColor = isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
     }
@@ -79,7 +86,7 @@ final class MovieQuizViewController: UIViewController, AlertPresenterDelegate, M
             
         }
         
-        alertPresenter?.showAlert(model: model, on: self)
+        alertPresenter?.showAlert(model: model)
     }
     
     func setButtonsEnabled(_ isEnabled: Bool) {
